@@ -183,7 +183,48 @@ void exportar_Por_Prioridade(Task tarefas[], int numTarefas) {
   fclose(file);
 }
 
+void exportar_Por_Categoria_Ordenado(Task tarefas[], int numTarefas) {
+  char categoria[300];
+  printf("Digite a categoria desejada para exportação: ");
+  scanf(" %[^\n]s", categoria);
+  limparBuffer();
 
+  int numFiltradas = 0;
+  Task filtradas[100];
+  for (int i = 0; i < numTarefas; i++) {
+    if (strcmp(tarefas[i].categoria, categoria) == 0) {
+      filtradas[numFiltradas++] = tarefas[i];
+    }
+  }
+
+  if (numFiltradas == 0) {
+    printf("Nenhuma tarefa encontrada para a categoria %s.\n", categoria);
+    return;
+  }
+
+  qsort(filtradas, numFiltradas, sizeof(Task), compararTarefas);
+
+  char nomeArquivo[300 + 5];
+  sprintf(nomeArquivo, "%s.txt", categoria);
+  FILE *arquivo = fopen(nomeArquivo, "w");
+  if (arquivo == NULL) {
+    printf("Erro ao abrir o arquivo para escrita.\n");
+    return;
+  }
+
+  fprintf(arquivo, "=== Tarefas da categoria %s ordenadas por prioridade ===\n",
+          categoria);
+  for (int i = 0; i < numFiltradas; i++) {
+    fprintf(arquivo, "Prioridade: %d\n", filtradas[i].prioridade);
+    fprintf(arquivo, "Categoria: %s\n", filtradas[i].categoria);
+    fprintf(arquivo, "Estado: %s\n", filtradas[i].status);
+    fprintf(arquivo, "Descricao: %s\n", filtradas[i].descricao);
+    fprintf(arquivo, "\n");
+  }
+
+  fclose(arquivo);
+  printf("Tarefas exportadas com sucesso para o arquivo: %s\n", nomeArquivo);
+}
 
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
