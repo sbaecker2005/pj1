@@ -27,8 +27,6 @@ void cadastrar(Task tarefas[], int *numTarefas) {
   (*numTarefas)++;
 }
 
-
-
 void listar(Task tarefas[], int numTarefas) {
   if (numTarefas == 0) {
     printf("Nenhuma tarefa cadastrada.\n");
@@ -45,6 +43,51 @@ void listar(Task tarefas[], int numTarefas) {
     printf("\n");
   }
 }
+
+void alterar(Task tarefas[], int numTarefas) {
+  int indice;
+  printf("Digite o índice da tarefa que deseja alterar: ");
+  scanf("%d", &indice);
+
+  if (indice >= 1 && indice <= numTarefas) {
+    printf("Escolha o campo a ser alterado:\n");
+    printf("1. Prioridade\n");
+    printf("2. Categoria\n");
+    printf("3. Estado\n");
+    printf("4. Descricao\n");
+    printf("Digite sua escolha: ");
+
+    int escolha;
+    scanf("%d", &escolha);
+
+    switch (escolha) {
+    case 1:
+      printf("Digite a nova Prioridade: ");
+      scanf("%d", &tarefas[indice - 1].prioridade);
+      break;
+    case 2:
+      printf("Digite a nova Categoria: ");
+      scanf(" %[^\n]s", tarefas[indice - 1].categoria);
+      break;
+    case 3:
+      printf("Digite o novo Estado: ");
+      scanf("%[^\n]s", tarefas[indice - 1].status);
+      break;
+    case 4:
+      printf("Digite a nova Descricao: ");
+      scanf("%[^\n]s", tarefas[indice - 1].descricao);
+      break;
+    default:
+      printf("Opção inválida.\n");
+    }
+  } else {
+    printf("Índice inválido.\n");
+  }
+}
+
+
+
+
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
         printf("Nenhuma tarefa para deletar.\n");
@@ -56,6 +99,10 @@ void deletarTarefa(Task tarefas[], int *numTarefas) {
     (*numTarefas)--;
     printf("Última tarefa removida.\n");
 }
+
+
+
+
 
 void salvarTarefas(Task tarefas[], int numTarefas) {
     FILE *file = fopen(FILENAME, "wb");
