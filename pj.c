@@ -144,7 +144,23 @@ void filtrar_Por_Categoria_Ordenado(Task tarefas[], int numTarefas) {
   }
 }
 
+void filtrar_Por_Prioridade_E_Categoria(Task tarefas[], int numTarefas) {
+  int prioridade;
+  char categoria[300];
+  printf("Digite a prioridade desejada: ");
+  scanf("%d", &prioridade);
+  printf("Digite a categoria desejada: ");
+  scanf(" %[^\n]s", categoria);
 
+  printf("=== Tarefas com Prioridade %d e Categoria %s ===\n", prioridade,
+         categoria);
+  for (int i = 0; i < numTarefas; i++) {
+    if (tarefas[i].prioridade == prioridade &&
+        strcmp(tarefas[i].categoria, categoria) == 0) {
+      exibir(tarefas[i]);
+    }
+  }
+}
 
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
