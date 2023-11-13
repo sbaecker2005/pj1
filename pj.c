@@ -1,6 +1,6 @@
 
 #include "pj.h"
-#include <stdio.h>
+#include <stdlib.h>
 
 void cadastrar(Task tarefas[], int *numTarefas) {
   if (*numTarefas >= 100) {
