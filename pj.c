@@ -112,6 +112,39 @@ void filtrar_Por_Estado(Task *tarefas, int num_tarefas) {
     }
   }
 }
+void filtrar_Por_Categoria_Ordenado(Task tarefas[], int numTarefas) {
+  char categoria[300];
+  printf("Digite a categoria desejada: ");
+  scanf(" %[^\n]s", categoria);
+  limparBuffer();
+
+  Task copiaTarefas[100];
+  memcpy(copiaTarefas, tarefas, numTarefas * sizeof(Task));
+
+  int numFiltradas = 0;
+  Task filtradas[100];
+  for (int i = 0; i < numTarefas; i++) {
+    if (strcmp(copiaTarefas[i].categoria, categoria) == 0) {
+      filtradas[numFiltradas++] = copiaTarefas[i];
+    }
+  }
+
+  qsort(filtradas, numFiltradas, sizeof(Task), compararPorPrioridade);
+
+  printf("=== Tarefas filtradas por categoria (%s) e ordenadas por prioridade "
+         "===\n",
+         categoria);
+  for (int i = 0; i < numFiltradas; i++) {
+    printf("Tarefa %d:\n", i + 1);
+    printf("Prioridade: %d\n", filtradas[i].prioridade);
+    printf("Categoria: %s\n", filtradas[i].categoria);
+    printf("Estado: %s\n", filtradas[i].status);
+    printf("Descricao: %s\n", filtradas[i].descricao);
+    printf("\n");
+  }
+}
+
+
 
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
