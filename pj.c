@@ -253,16 +253,25 @@ void exportar_Por_Prioridade_E_Categoria(Task tarefas[], int numTarefas) {
 }
 
 
-void deletarTarefa(Task tarefas[], int *numTarefas) {
-    if (*numTarefas == 0) {
-        printf("Nenhuma tarefa para deletar.\n");
-        return;
-    }
+void deletar(Task tarefas[], int *numTarefas) {
+  if (*numTarefas == 0) {
+    printf("Nenhuma tarefa para deletar.\n");
+    return;
+  }
 
-    // Adicione a lógica para deletar uma tarefa aqui
-    // Este é um exemplo que remove a última tarefa
+  int indice;
+  printf("Digite o índice da tarefa que deseja deletar: ");
+  scanf("%d", &indice);
+
+  if (indice >= 1 && indice <= *numTarefas) {
+    for (int i = indice - 1; i < *numTarefas - 1; i++) {
+      tarefas[i] = tarefas[i + 1];
+    }
     (*numTarefas)--;
-    printf("Última tarefa removida.\n");
+    printf("Tarefa deletada com sucesso.\n");
+  } else {
+    printf("Índice inválido.\n");
+  }
 }
 
 
