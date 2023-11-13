@@ -1,21 +1,34 @@
-#ifndef TASKS_H
-#define TASKS_H
+#ifndef PJ_H
+#define PJ_H
 
-#define MAX_DESC_LEN 300
-#define MAX_CAT_LEN 100
-#define MAX_TASKS 100
-#define FILENAME "tasks.bin"
+#include <stdio.h>
+#include <string.h>
+
+
+#define FILENAME "tasks.txt"
+
 
 typedef struct {
-    int priority;
-    char description[MAX_DESC_LEN];
-    char category[MAX_CAT_LEN];
+    int prioridade;
+    char descricao[300];
+    char categoria[100];
+    char status[13];
 } Task;
 
-void cadastrarTarefa(Task tarefas[], int *numTarefas);
-void listarTarefas(Task tarefas[], int numTarefas);
-void deletarTarefa(Task tarefas[], int *numTarefas);
-void salvarTarefas(Task tarefas[], int numTarefas);
-void carregarTarefas(Task tarefas[], int *numTarefas);
+void cadastrar(Task tarefas[], int *numTarefas);
+void listar(Task tarefas[], int numTarefas);
+void alterar(Task tarefas[], int numTarefas);
+void filtrar_Por_Prioridade(Task tarefas[], int numTarefas);
+void filtrar_Por_Estado(Task tarefas[], int numTarefas);
+void filtrar_Por_Categoria_Ordenado(Task tarefas[], int numTarefas);
+void filtrar_Por_Prioridade_E_Categoria(Task tarefas[], int numTarefas);
+void exportar_Por_Prioridade(Task tarefas[], int numTarefas);
+void exportar_Por_Categoria_Ordenado(Task tarefas[], int numTarefas);
+void exportar_Por_Prioridade_E_Categoria(Task tarefas[], int numTarefas);
+void deletar(Task tarefas[], int *numTarefas);
+void salvar(Task tarefas[], int numTarefas);
+void carregar(Task tarefas[], int *numTarefas);
+void exibir(Task tarefa);
 
-#endif  // TASKS_H
+
+#endif
