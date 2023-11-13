@@ -275,22 +275,17 @@ void deletar(Task tarefas[], int *numTarefas) {
 }
 
 
+void salvar(Task tarefas[], int numTarefas) {
+  FILE *file = fopen(FILENAME, "w");
+  if (file == NULL) {
+    printf("Erro ao abrir o arquivo para escrita.\n");
+    return;
+  }
 
+  fwrite(&numTarefas, sizeof(int), 1, file);
+  fwrite(tarefas, sizeof(Task), numTarefas, file);
 
-
-void salvarTarefas(Task tarefas[], int numTarefas) {
-    FILE *file = fopen(FILENAME, "wb");
-    if (file == NULL) {
-        printf("Erro ao abrir o arquivo para escrita.\n");
-        return;
-    }
-
-    fwrite(&numTarefas, sizeof(int), 1, file);  // Salva o número de tarefas primeiro
-
-
-    fwrite(tarefas, sizeof(Task), numTarefas, file);
-
-    fclose(file);
+  fclose(file);
 }
 
 void carregarTarefas(Task tarefas[], int *numTarefas) {
