@@ -29,22 +29,22 @@ void cadastrar(Task tarefas[], int *numTarefas) {
 
 
 
-void listarTarefas(Task tarefas[], int numTarefas) {
-    if (numTarefas == 0) {
-        printf("Nenhuma tarefa cadastrada.\n");
-        return;
-    }
+void listar(Task tarefas[], int numTarefas) {
+  if (numTarefas == 0) {
+    printf("Nenhuma tarefa cadastrada.\n");
+    return;
+  }
 
-    printf("=== Lista de Tarefas ===\n");
-    for (int i = 0; i < numTarefas; i++) {
-        printf("Tarefa %d:\n", i + 1);
-        printf("Descrição: %s\n", tarefas[i].description);
-        printf("Categoria: %s\n", tarefas[i].category);
-        printf("Prioridade: %d\n", tarefas[i].priority);
-        printf("\n");
-    }
+  printf("=== Lista de Tarefas ===\n");
+  for (int i = 0; i < numTarefas; i++) {
+    printf("Tarefa %d:\n", i + 1);
+    printf("Prioridade: %d\n", tarefas[i].prioridade);
+    printf("Categoria: %s\n", tarefas[i].categoria);
+    printf("Estado: %s\n", tarefas[i].status);
+    printf("Descricao: %s\n", tarefas[i].descricao);
+    printf("\n");
+  }
 }
-
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
         printf("Nenhuma tarefa para deletar.\n");
