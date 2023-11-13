@@ -85,6 +85,19 @@ void alterar(Task tarefas[], int numTarefas) {
   }
 }
 
+void filtrar_Por_Prioridade(Task tarefas[], int numTarefas) {
+  int prioridade;
+  printf("Digite a prioridade desejada: ");
+  scanf("%d", &prioridade);
+  limparBuffer();
+
+  printf("=== Tarefas com Prioridade %d ===\n", prioridade);
+  for (int i = 0; i < numTarefas; i++) {
+    if (tarefas[i].prioridade == prioridade) {
+      exibir(tarefas[i]);
+    }
+  }
+}
 
 
 
