@@ -99,7 +99,19 @@ void filtrar_Por_Prioridade(Task tarefas[], int numTarefas) {
   }
 }
 
-
+void filtrar_Por_Estado(Task *tarefas, int num_tarefas) {
+  char estado[50];
+  printf("Qual estado deseja filtrar? ");
+  scanf("%s", estado);
+  printf("Tarefas com o estado %s:\n", estado);
+  for (int i = 0; i < num_tarefas; i++) {
+    if (strcmp(tarefas[i].status, estado) == 0) {
+      printf("Prioridade: %d\n", tarefas[i].prioridade);
+      printf("Categoria: %s\n", tarefas[i].categoria);
+      printf("Descricao: %s\n", tarefas[i].descricao);
+    }
+  }
+}
 
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
