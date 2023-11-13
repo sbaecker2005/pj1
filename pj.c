@@ -1,6 +1,27 @@
-
 #include "pj.h"
 #include <stdlib.h>
+
+int compararPorPrioridade(const void *a, const void *b) {
+  return ((Task *)b)->prioridade - ((Task *)a)->prioridade;
+}
+
+int compararPorCategoria(const void *a, const void *b) {
+  return strcmp(((Task *)a)->categoria, ((Task *)b)->categoria);
+}
+
+int compararTarefas(const void *a, const void *b) {
+
+  int comparacaoCategoria =
+      strcmp(((Task *)a)->categoria, ((Task *)b)->categoria);
+
+  if (comparacaoCategoria == 0) {
+    return ((Task *)b)->prioridade - ((Task *)a)->prioridade;
+  }
+
+  return comparacaoCategoria;
+}
+
+
 
 void cadastrar(Task tarefas[], int *numTarefas) {
   if (*numTarefas >= 100) {
