@@ -288,17 +288,23 @@ void salvar(Task tarefas[], int numTarefas) {
   fclose(file);
 }
 
-void carregarTarefas(Task tarefas[], int *numTarefas) {
-    FILE *file = fopen(FILENAME, "rb");
-    if (file == NULL) {
-        printf("Arquivo de dados não encontrado. Criando um novo.\n");
-        return;
-    }
+void carregar(Task tarefas[], int *numTarefas) {
+  FILE *file = fopen(FILENAME, "r");
+  if (file == NULL) {
+    printf("Arquivo de dados não encontrado. Criando um novo.\n");
+    return;
+  }
 
-    fread(numTarefas, sizeof(int), 1, file);  // Lê o número de tarefas primeiro
+  fread(numTarefas, sizeof(int), 1, file);
+  fread(tarefas, sizeof(Task), *numTarefas, file);
 
+  fclose(file);
+}
 
-    fread(tarefas, sizeof(Task), *numTarefas, file);
-
-    fclose(file);
+void exibir(Task tarefa) {
+  printf("Prioridade: %d\n", tarefa.prioridade);
+  printf("Categoria: %s\n", tarefa.categoria);
+  printf("Estado: %s\n", tarefa.status);
+  printf("Descricao: %s\n", tarefa.descricao);
+  printf("\n");
 }
