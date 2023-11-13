@@ -2,26 +2,32 @@
 #include "pj.h"
 #include <stdio.h>
 
-void cadastrarTarefa(Task tarefas[], int *numTarefas) {
-    if (*numTarefas >= MAX_TASKS) {
-        printf("Limite de tarefas atingido.\n");
-        return;
-    }
+void cadastrar(Task tarefas[], int *numTarefas) {
+  if (*numTarefas >= 100) {
+    printf("Limite de tarefas atingido.\n");
+    return;
+  }
 
-    // Adicione a lógica para cadastrar uma tarefa aqui
-    printf("Função cadastrarTarefa chamada.\n");
-    // Exemplo: solicitar informações do usuário e armazenar na próxima posição disponível no vetor de tarefas
-    printf("Digite a descrição da tarefa: ");
-    scanf(" %[^\n]s", tarefas[*numTarefas].description);
+  printf("Digite a Prioridade o da tarefa: ");
+  scanf(" %d", &tarefas[*numTarefas].prioridade);
+  limparBuffer();
 
-    printf("Digite a categoria da tarefa: ");
-    scanf(" %[^\n]s", tarefas[*numTarefas].category);
+  printf("Digite a categoria da tarefa: ");
+  scanf(" %[^\n]s", tarefas[*numTarefas].categoria);
+  limparBuffer();
 
-    printf("Digite a prioridade da tarefa (0 a 10): ");
-    scanf("%d", &tarefas[*numTarefas].priority);
+  printf("Digite o Estado da tarefa: ");
+  scanf("%s", tarefas[*numTarefas].status);
+  limparBuffer();
 
-    (*numTarefas)++;
+  printf("Digite a Descricao da tarefa: ");
+  scanf("%s", tarefas[*numTarefas].descricao);
+  limparBuffer();
+
+  (*numTarefas)++;
 }
+
+
 
 void listarTarefas(Task tarefas[], int numTarefas) {
     if (numTarefas == 0) {
