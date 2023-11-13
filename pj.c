@@ -162,6 +162,29 @@ void filtrar_Por_Prioridade_E_Categoria(Task tarefas[], int numTarefas) {
   }
 }
 
+void exportar_Por_Prioridade(Task tarefas[], int numTarefas) {
+  int prioridade;
+  printf("Digite a prioridade desejada para exportação: ");
+  scanf("%d", &prioridade);
+
+  FILE *file = fopen("export_by_priority.txt", "w");
+  if (file == NULL) {
+    printf("Erro ao criar o arquivo para exportação.\n");
+    return;
+  }
+
+  for (int i = 0; i < numTarefas; i++) {
+    if (tarefas[i].prioridade == prioridade) {
+      fprintf(file, "%d, %s, %s, %s\n", tarefas[i].prioridade,
+              tarefas[i].categoria, tarefas[i].descricao, tarefas[i].status);
+    }
+  }
+
+  fclose(file);
+}
+
+
+
 void deletarTarefa(Task tarefas[], int *numTarefas) {
     if (*numTarefas == 0) {
         printf("Nenhuma tarefa para deletar.\n");
